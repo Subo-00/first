@@ -7,6 +7,7 @@ class CalculatorBrain {
     required this.height,
     required this.weight,
   });
+
   final int age;
   final Gender? gender;
   final int weight;
@@ -19,23 +20,13 @@ class CalculatorBrain {
     return _bmi.toStringAsFixed(1);
   }
 
-  String getInterpretation() {
+  List<String> getInterpretation() {
     if (_bmi < 17) {
-      return 'You have less then ideal weight, eat more.';
+      return ['UNDERWEIGHT', 'You have less then ideal weight, eat more.'];
     } else if (_bmi < 25) {
-      return 'You have an ideal weight. Great!';
+      return ['NORMAL', 'You have an ideal weight. Great!'];
     } else {
-      return 'You are overweight, better eat less.';
-    }
-  }
-
-  String bodyState() {
-    if (_bmi < 17) {
-      return 'UNDERWEIGHT';
-    } else if (_bmi < 25) {
-      return 'NORMAL';
-    } else {
-      return 'OVERWEIGHT';
+      return ['OVERWEIGHT', 'You are overweight, better eat less.'];
     }
   }
 }

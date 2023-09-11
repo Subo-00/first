@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'reusable_box.dart';
 import 'icon_content.dart';
 import 'constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 enum Gender { male, female }
 
@@ -97,7 +98,7 @@ class _InputPageState extends State<InputPage> {
                         thumbShape: RoundSliderThumbShape(
                             enabledThumbRadius: thumbRedius),
                         overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 25),
+                            RoundSliderOverlayShape(overlayRadius: 22),
                         overlayColor: Color(0x20EB1555)),
                     child: Slider(
                         min: 120,
@@ -106,7 +107,7 @@ class _InputPageState extends State<InputPage> {
                         value: height.toDouble(),
                         onChanged: (double newValue) {
                           setState(() {
-                            thumbRedius = newValue / 17;
+                            thumbRedius = newValue / 16;
                             height = newValue.toInt();
                           });
                         }),
@@ -181,9 +182,39 @@ class _InputPageState extends State<InputPage> {
                             RoundedIconButton(
                               icon: FontAwesomeIcons.minus,
                               onPressed: () {
-                                setState(() {
-                                  age--;
-                                });
+                                if (age != 18) {
+                                  setState(() {
+                                    age--;
+                                  });
+                                } else {
+                                  Alert(
+                                          buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "COOL",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
+                                          color: Color(0xFFEB1555),
+                                          radius: BorderRadius.circular(0.0),
+                                        ),
+                                      ],
+                                          style: AlertStyle(
+                                              titleStyle: TextStyle(
+                                                  color: Colors.white60),
+                                              descStyle: TextStyle(
+                                                  color: Colors.white70),
+                                              backgroundColor:
+                                                  Color(0xFF0A0E21)),
+                                          context: context,
+                                          title: "SORRY",
+                                          desc:
+                                              "Calculation is possible only for people over 18.")
+                                      .show();
+                                }
                               },
                             ),
                             SizedBox(
@@ -222,7 +253,6 @@ class _InputPageState extends State<InputPage> {
                       MaterialPageRoute(
                           builder: (context) => ResultPage(
                                 bmi: calc.calculateBMI(),
-                                bodyState: calc.bodyState(),
                                 interpretation: calc.getInterpretation(),
                               )));
                 }

@@ -4,13 +4,9 @@ import 'constants.dart';
 import 'calculating_bmi.dart';
 
 class ResultPage extends StatelessWidget {
-  ResultPage(
-      {required this.bmi,
-      required this.bodyState,
-      required this.interpretation});
+  ResultPage({required this.bmi, required this.interpretation});
   String bmi;
-  String bodyState;
-  String interpretation;
+  List<String> interpretation;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class ResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       Text(
-                        bodyState,
+                        interpretation[0],
                         style: TextStyle(
                             color: Colors.green.shade400,
                             fontSize: 23,
@@ -47,7 +43,7 @@ class ResultPage extends StatelessWidget {
                         style: kLabelNumberStyle.copyWith(fontSize: 80),
                       ),
                       Text(
-                        interpretation,
+                        interpretation[1],
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 20,
